@@ -17,11 +17,46 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
 }
 
 function validateInput(testInput) {
-   
+    window.addEventListener("load", function() {
+        let form = document.querySelector("form");
+        form.addEventListener("formSubmit", function(event) {
+           let pilotNameInput = document.querySelector("input[name=pilotName]");
+           let copilotNameInput = document.querySelector("input[name=copilotName]");
+           let fuelLevelInput = document.querySelector("input[name=fuelLevel]");
+           let cargoMassInput = document.querySelector("input[name=cargoMass");
+           if (pilotNameInput.value === "" || copilotNameInput.value === "" || isNaN(fuelLevelInput.value) || isNaN(cargoMassInput.value) ) {
+              alert("All fields are required!");
+              // stop the form submission
+              event.preventDefault();
+           } 
+        });
+     });
 }
 
 function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
-   
+   validateInput();
+   document.getElementById('pilotStatus').innerHTML = `Pilot ${pilotNameInput.value} Ready`;
+   document.getElementById('copilotStatus').innerHTML = `Copilot ${copilotNameInput.value} Ready`;
+
+   if (Number(fuelLevelInput.value) < 10000){
+    document.getElementById('faultyItems').style.visibility = "visible"
+    document.getElementById('fuelStatus').innerHTML = `There is not enough fuel for the journey`;
+    document.getElementById('launchStatus').innerHTML = 'Shuttle not ready for launch!';
+    document.getElementById('launchStatus').style.color= "red";
+   }
+
+   if (Number(cargoMassInput.value) > 10000) {
+    document.getElementById("faultyItems").style.visibility = "visible";
+    document.getElementById('cargoStatus').innerHTML = `There is too much mass for the shuttle to take off.`
+    document.getElementById('launchStatus').innerHTML = 'Shuttle not ready for launch!';
+    document.getElementById('launchStatus').style.color= "red";
+   }
+
+   if (readyToGo){
+    document.getElementById('faultyItems').style.visibility = 'visible';
+    document.getElementById('launchStatus').innerHTML = `Shuttle is ready for launch`;
+    document.getElementById('launchStatus').style.color = 'green';
+   }
 }
 
 async function myFetch() {
