@@ -40,8 +40,8 @@ function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
    validateInput();
 
    //if (pilotNameInput.value === "" && copilotNameInput === "")
-   document.getElementById('pilotStatus').innerHTML = `Pilot ${pilotNameInput.value} Ready`;
-   document.getElementById('copilotStatus').innerHTML = `Copilot ${copilotNameInput.value} Ready`;
+   document.getElementById('pilotStatus').innerHTML = `Pilot Chris Ready`;
+   document.getElementById('copilotStatus').innerHTML = `Copilot Blake Ready`;
 
    if (fuelLevelInput.value < 10000) {
     document.getElementById('faultyItems').style.visibility = "visible"
@@ -73,15 +73,24 @@ function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
 }
 
 async function myFetch() {
-    fetch("https://handlers.education.launchcode.org/static/planets.json").then(function(response){
-        response.json().then( function(json){
-            const div = document.getElementById('missionTarget');
-        })
-        //const fetchPromise = fetch("https://handlers.education.launchcode.org/static/planets.json");
-        //fetchPromise.then( function(response){}
-            //
+    //fetch("https://handlers.education.launchcode.org/static/planets.json").then(function(response){
+       // response.json().then( function(json){
+           // console.log(json[index].name);
+            //const div = document.getElementById('missionTarget');
         //})
-    });
+        //const fetchPromise = fetch("https://handlers.education.launchcode.org/static/planets.json");
+        //fetchPromise.then( function(response){
+            //console.log(response);
+        //}
+        const fetchPromise = fetch("https://handlers.education.launchcode.org/static/planets.json");
+        fetchPromise.then( function(response) {
+           const jsonPromise = response.json();
+           jsonPromise.then( function(json) {
+              console.log("temp", json.temp);
+           });
+        } );
+        //})
+    //});
 
     let planetsReturned;
 
@@ -95,7 +104,7 @@ function pickPlanet(planets) {
         let index = Math.floor(Math.random() * json.length);
         console.log(json[index].name);
     
-}
+};
 
 module.exports.addDestinationInfo = addDestinationInfo;
 module.exports.validateInput = validateInput;
