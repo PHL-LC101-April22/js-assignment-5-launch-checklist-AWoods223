@@ -85,9 +85,9 @@ async function myFetch() {
         const fetchPromise = fetch("https://handlers.education.launchcode.org/static/planets.json");
         fetchPromise.then( function(response) {
            const jsonPromise = response.json();
-           jsonPromise.then( function(json) {
-              console.log("temp", json.temp);
-           });
+           //jsonPromise.then( function(json) {
+            //   console.log("temp", json.temp); <--textbook example copy and paste
+           //});
         } );
         //})
     //});
