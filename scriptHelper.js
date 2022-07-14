@@ -24,7 +24,7 @@ function validateInput(testInput) {
            let copilotNameInput = document.querySelector("input[name=copilotName]");
            let fuelLevelInput = document.querySelector("input[name=fuelLevel]");
            let cargoMassInput = document.querySelector("input[name=cargoMass");
-           if (pilotNameInput.value === "" || copilotNameInput.value === "" || isNaN(fuelLevelInput.value) || isNaN(cargoMassInput.value) ) {
+           if (pilotNameInput.value === "" || copilotNameInput.value === "" || fuelLevelInput.value === "" || cargoMassInput.value === "") {
               alert("All fields are required!");
               // stop the form submission
               event.preventDefault();
@@ -37,11 +37,18 @@ let fuelReady = false;
 let cargoReady = false;
 //let crewReady = false;
 function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
-   validateInput();
+   
+   let pilotNameInput = document.querySelector("input[name=pilotName]");
+   let copilotNameInput = document.querySelector("input[name=copilotName]");
+   let fuelLevelInput = document.querySelector("input[name=fuelLevel]");
+   let cargoMassInput = document.querySelector("input[name=cargoMass");
 
-   //if (pilotNameInput.value === "" && copilotNameInput === "")
+   if (pilotNameInput.value === "" && copilotNameInput === ""){
+      alert("Empty");
+   }else{
    document.getElementById('pilotStatus').innerHTML = `Pilot Chris Ready`;
    document.getElementById('copilotStatus').innerHTML = `Copilot Blake Ready`;
+   };
 
    if (fuelLevelInput.value < 10000) {
     document.getElementById('faultyItems').style.visibility = "visible"
@@ -70,16 +77,15 @@ function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
     document.getElementById('launchStatus').innerHTML = `Shuttle is ready for launch`;
     document.getElementById('launchStatus').style.color = 'green';
    }
+   event.preventDefault();
 }
 
 async function myFetch() {
-    fetch("https://handlers.education.launchcode.org/static/planets.json").then( function(response) {
-        return response.json();
-} );
-    
-    let planetsReturned ;
+  
+      let planetsReturned ;
 
-    planetsReturned = await fetch().then( function(response) {
+    planetsReturned = await fetch("https://handlers.education.launchcode.org/static/planets.json").then( function(response) {
+        return response.json();
         });
 
     return planetsReturned;
